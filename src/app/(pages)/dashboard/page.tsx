@@ -12,9 +12,9 @@ const Dashboard: FC<TDashboardProps> = ({}) => {
   const btnStyle = "border border-b rounded-none text-black ";
   return (
     <MaxWidthWrapper>
-      <div className="flex">
-        <div className="w-1/4">
-          <div className="flex flex-col h-screen ">
+      <div className="flex flex-col md:flex-row">
+        <div className="w-full md:w-1/4">
+          <div className="flex flex-col md:h-screen ">
             <h1 className="pb-4 font-black text-2xl underline">
               My Acme valikko
             </h1>
@@ -38,7 +38,7 @@ const Dashboard: FC<TDashboardProps> = ({}) => {
             </Button>
           </div>
         </div>
-        <div className="border mx-4"></div>
+        <div className="border mx-4 my-6 md:my-0"></div>
         <div className="w-3/4">
           <h1 className="pb-4 font-black text-2xl underline">
             Viimeisimmät tapahtumat

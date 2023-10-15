@@ -50,12 +50,15 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
   return (
     <MaxWidthWrapper>
       <div className="flex flex-col gap-y-4">
-        <div className="flex justify-center">
+        <Link className="font-bold" href="/products">
+          Takaisin
+        </Link>
+        <div className="flex flex-col lg:flex-row justify-center">
           <div>
             <CldImage
               width="1024"
               height="1024"
-              className="rounded-tl-2xl rounded-bl-2xl w-full"
+              className="rounded-tl-2xl md:rounded-bl-2xl w-full"
               src={safeProduct.imageId}
               crop="scale"
               alt={safeProduct.description}
@@ -63,7 +66,7 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
           </div>
           <Card
             className={cn(
-              "relative rounded-none rounded-tr-2xl w-full rounded-br-2xl "
+              "relative rounded-none w-full md:rounded-tr-2xl rounded-br-2xl "
             )}
           >
             <CardHeader>
@@ -81,7 +84,7 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
                 <div>{safeProduct.quantity} kpl</div>
               </div>
             </CardContent>
-            <CardFooter className={"absolute bottom-0"}>
+            <CardFooter className={"md:absolute md:bottom-0"}>
               <div className="flex flex-col">
                 <CardDescription className="font-bold">
                   Tuotekoodi
@@ -92,9 +95,6 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
           </Card>
         </div>
       </div>
-      <Link className="font-bold" href="/products">
-        Takaisin
-      </Link>
     </MaxWidthWrapper>
   );
 };

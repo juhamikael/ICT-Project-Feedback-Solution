@@ -75,8 +75,8 @@ const Products = () => {
   };
   return (
     <MaxWidthWrapper>
-      <div className="flex flex-row justify-around">
-        <div className="w-1/4 px-4">
+      <div className="flex flex-col md:flex-row justify-around">
+        <div className="md:w-1/4 md:px-4">
           <div className="flex flex-col gap-y-2">
             <Select onValueChange={(e) => setFilteredPrice(e)}>
               <SelectTrigger>
@@ -107,22 +107,22 @@ const Products = () => {
           </div>
         </div>
 
-        <div className="w-3/4">
+        <div className="w-full md:w-3/4">
           <div className="pb-6 font-bold">
             {selectedCategory ? _.capitalize(selectedCategory) : "Kaikki"}{" "}
             {selectedPrice ? `alle ${selectedPrice} €` : ""}
           </div>
-          <div className="grid grid-cols-3 gap-x-10 gap-y-10">
+          <div className="grid md:grid-cols-3 gap-x-10 gap-y-10">
             {filteredProducts.map((product, index) => (
               <Link
                 className={cn("cursor-pointer", zoom.zoom)}
                 href={`products/${product.productType}/${product.id}`}
                 key={index}
               >
-                <Card className={cn("rounded-xl ")}>
+                <Card className={cn("rounded-xl")}>
                   <CldImage
-                    width="256"
-                    height="256"
+                    width="1024"
+                    height="1024"
                     className="w-full rounded-t-xl "
                     src={product.imageId}
                     crop="scale"
