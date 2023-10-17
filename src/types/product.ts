@@ -1,0 +1,18 @@
+export type TProduct = {
+    id: string;
+    imageId: string;
+    name: string;
+    price: number;
+    description: string;
+    quantity: number;
+    productType: string;
+};
+
+export type TProductInfo = {
+    type: string;
+    products: TProduct[];
+};
+
+export type TAllProducts = {
+    [category: string]: TProductInfo[];
+};
