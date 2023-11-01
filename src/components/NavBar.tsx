@@ -9,12 +9,11 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import UserButton from "./thirdPartyComponents/kinde-starter/UserButton";
-const NavBar = ({}) => {
-  const { getUser, isAuthenticated } = getKindeServerSession();
-
+const NavBar = async ({}) => {
+  const { getUser, isAuthenticated, getPermission } = getKindeServerSession();
+  const getPermissionFlag = getPermission("add-products");
   const user = getUser();
   const userAuthenticated = isAuthenticated();
-  console.log(user);
   return (
     <MaxWidthWrapper className="pb-8">
       <nav className="flex justify-between items-center border-b">
@@ -37,6 +36,9 @@ const NavBar = ({}) => {
         </div>
         {userAuthenticated ? (
           <div className="flex gap-x-4 items-center">
+            {getPermissionFlag.isGranted && (
+              <Link href="/add-products">Lisää tuote</Link>
+            )}
             <UserButton isAuthenticated={userAuthenticated} user={user} />
           </div>
         ) : (
