@@ -1,0 +1,93 @@
+
+### Get all categories
+GET http://localhost:3000/api/categories
+### Get all subcategories
+GET http://localhost:3000/api/sub-categories
+
+### Post new category
+POST http://localhost:3000/api/categories
+Content-Type: application/json
+
+{
+    "id": 11,
+    "name": "musiikki"
+}
+
+### Post new category
+POST http://localhost:3000/api/sub-categories
+Content-Type: application/json
+
+{
+        "id": 12,
+        "name": "kosketinsoittimet",
+        "categoryId": 10
+}
+
+
+### Post all categories and subcategories
+POST http://localhost:3000/api/bulk-categories
+Content-Type: application/json
+{
+    "categories": [
+        {
+            "name": "kellot",
+            "subcategories": [
+                {
+                    "name": "rannekellot"
+                }
+            ]
+        },
+        {
+            "name": "puhelimet",
+            "subcategories": [
+                {
+                    "name": "alypuhelimet"
+                }
+            ]
+        },
+        {
+            "name": "tietokoneet",
+            "subcategories": [
+                {
+                    "name": "kannettavat"
+                },
+                {
+                    "name": "poytakoneet"
+                },
+                {
+                    "name": "tabletit"
+                }
+            ]
+        },
+        {
+            "name": "koti",
+            "subcategories": [
+                {
+                    "name": "jaakaapit"
+                },
+                {
+                    "name": "siivous"
+                }
+            ]
+        },
+        {
+            "name": "kamerat",
+            "subcategories": [
+                {
+                    "name": "jarjestelma-kamerat"
+                },
+                {
+                    "name": "digitalCameras"
+                }
+            ]
+        },
+        {
+            "name": "audio",
+            "subcategories": [
+                {
+                    "name": "kuulokkeet"
+                }
+            ]
+        }
+    ]
+}

@@ -6,21 +6,12 @@ import _ from "lodash";
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import zoom from "@/styles/zoom.module.css";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Link from "next/link";
@@ -38,7 +29,6 @@ const Products = () => {
     let newFilteredProducts: TProduct[] = [];
     Object.keys(allProducts).forEach((category) => {
       allProducts[category].forEach((productInfo: any) => {
-        // Type this properly based on your data structure
         if (productInfo.products) {
           productInfo.products.forEach((product: TProduct) => {
             if (

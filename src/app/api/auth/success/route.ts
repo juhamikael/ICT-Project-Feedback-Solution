@@ -9,7 +9,7 @@ export async function GET() {
     const user = getUser();
 
     if (!user || user == null || !user.id)
-        throw new Error("something went wrong with authentication" + user);
+        throw new Error("something went wrong with authentication");
 
     const dbUser = await db.select().from(users).where(eq(users.id, user.id)).get();
 
