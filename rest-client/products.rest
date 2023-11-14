@@ -9,14 +9,14 @@ POST http://localhost:3000/api/products/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "id": 3,
+    "id": "80c746ab-48d7-4e9d-af44-0082014c0a42",
     "imageId": "cd879f3e-bbf0-4f49-befb-ccb2b6c7a990_jitspk",
     "name": "AcmeWatch 3",
     "price": 4990,
     "description": "Acme Watch 3, tilanteeseen kuin tilanteeseen",
     "quantity": 30,
-    "categoryId": 1,
-    "subcategoryId": 1
+    "categoryId": "2670fd44-1cfa-4234-9c0a-bb2206102efe",
+    "subcategoryId": "cee1b4de-bd44-484e-b9a5-7d65421dce46"
 }
 
 ###
@@ -25,14 +25,14 @@ POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-  "id": "4",
+  "id": "1ebaf8a3-e8c2-4c54-8d97-151a3d3bfc79",
   "imageId": "cd879f3e-bbf0-4f49-befb-ccb2b6c7a990_jitspk",
   "name": "AcmeWatch 4",
   "price": 399,
   "description": "Kaunis kello joka sopii kaikille",
   "quantity": 30,
-  "categoryId": 1,
-  "subcategoryId": 1
+  "categoryId": "2670fd44-1cfa-4234-9c0a-bb2206102efe",
+  "subcategoryId": "cee1b4de-bd44-484e-b9a5-7d65421dce46"
 }
 
 ###
@@ -41,14 +41,14 @@ POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-  "id": "5",
+  "id": "a319c1f1-1a5f-49d8-afb1-e511dc06201f",
   "imageId": "0e2ddb72-97c6-4b9a-9640-f1e91f5fe4d3_l2fhun",
   "name": "AcmePhone 10",
   "price": 599,
   "description": "Vanhempi AcmePhone, 7G, Huikea äänentoisto sekä USB-C yhteensopiva",
   "quantity": 15,
-  "categoryId": 3,
-  "subcategoryId": 3
+  "categoryId": "6e780eba-f3f2-4c5f-b0b0-0b892a0bde7d",
+  "subcategoryId": "d4284ac8-41cb-4c11-8ec1-de283b6c2389"
 }
 
 ###
@@ -57,14 +57,14 @@ POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-  "id": "6",
+  "id": "5a213773-0d59-4d3e-ab76-019e499459e4",
   "imageId": "9a73596f-5fb9-4160-87aa-6a35a1721975_a1rblq",
   "name": "Acme LapDragon 3",
   "price": 1290,
   "description": "The best laptop ever",
   "quantity": 15,
-  "categoryId": 4,
-  "subcategoryId": 4
+  "categoryId": "b6522c16-6fa6-4ffc-b18b-46a218dbd92c",
+  "subcategoryId": "dc435277-d7d9-4624-bf34-77aefe2efc75"
 }
 
 ###
@@ -73,14 +73,14 @@ POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-  "id": "7",
+  "id": "ae34cba9-e341-4fc2-802a-2b78c91f71c7",
   "imageId": "d2de67ec-d276-4a1b-9146-c9fd4c235bb7_yzkris",
   "name": "Acme Fr1",
   "price": 659,
   "description": "Moderni jääkaappi kaikiin tarpeisiin",
   "quantity": 10,
-  "categoryId": 5,
-  "subcategoryId": 7
+  "categoryId": "d65f64dd-1f97-46da-b197-19d9b04e7a8b",
+  "subcategoryId": "c0f4e4d1-913f-4f19-b4f7-a4a5a9383325"
 }
 
 ###
@@ -89,14 +89,14 @@ POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-  "id": "8",
+  "id": "770bcc6e-ec6f-4dde-88b0-dc7c1728b5cc",
   "imageId": "54140d93-3cb4-4fd2-bdd1-46116346771a_qceb0i",
   "name": "AcmeClean 700",
   "price": 149,
   "description": "Moderni siivousrobotti, erittäin hiljainen",
   "quantity": 20,
-  "categoryId": 5,
-  "subcategoryId": 8
+  "categoryId": "d65f64dd-1f97-46da-b197-19d9b04e7a8b",
+  "subcategoryId": "2081e79c-d9b5-4319-92a7-5c64f9ac2e42"
 }
 
 ###
@@ -105,14 +105,14 @@ POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-  "id": "9",
+  "id": "d3ca210d-1501-4879-8584-7f658a5a6a4b",
   "imageId": "dfe7150f-ac42-4a81-a620-d545b675ddf4",
   "name": "Acme C432",
   "price": 998,
   "description": "The best camera ever",
   "quantity": 15,
-  "categoryId": 6,
-  "subcategoryId": 9
+  "categoryId": "6762b4fe-bcac-4367-bbc9-23f0f398c800",
+  "subcategoryId": "0448a6d5-eb34-436f-868e-e2a6da88f3d3"
 }
 
 ###
@@ -121,12 +121,12 @@ POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-  "id": "10",
+  "id": "464f7ff6-a73b-4983-b182-c88a2f544d56",
   "imageId": "c608f458-7f34-49e0-a06d-d6e453341341",
   "name": "AcmePods 4",
   "price": 199,
   "description": "Bluetooth kuulokkeet langattomalla latauksella, laadukas ääni",
   "quantity": 80,
-  "categoryId": 7,
-  "subcategoryId": 1
+  "categoryId": "a4de2f74-c54e-472b-8503-df061451328f",
+  "subcategoryId": "eb2e8a97-722d-4c24-b9ba-e049c77b0c68"
 }
