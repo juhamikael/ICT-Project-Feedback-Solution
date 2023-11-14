@@ -4,7 +4,7 @@ import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { z } from 'zod';
 
 export const products = sqliteTable("products", {
-    id: integer("id").primaryKey(),
+    id: text("id").primaryKey(),
     imageId: text("imageId").notNull(),
     name: text("name").notNull(),
     price: integer("price").notNull(),
@@ -15,14 +15,14 @@ export const products = sqliteTable("products", {
 });
 
 export const categories = sqliteTable("categories", {
-    id: integer("id").primaryKey(),
+    id: text("id").primaryKey(),
     name: text("name").notNull(),
 });
 
 export const subcategories = sqliteTable("subcategories", {
-    id: integer("id").primaryKey(),
+    id: text("id").primaryKey(),
     name: text("name").notNull(),
-    categoryId: integer("categoryId").references(() => categories.id, { onDelete: "cascade" }),
+    categoryId: text("categoryId").references(() => categories.id, { onDelete: "cascade" }),
 });
 
 

@@ -4,29 +4,11 @@ GET http://localhost:3000/api/categories
 ### Get all subcategories
 GET http://localhost:3000/api/sub-categories
 
-### Post new category
-POST http://localhost:3000/api/categories
-Content-Type: application/json
-
-{
-    "id": 11,
-    "name": "musiikki"
-}
-
-### Post new category
-POST http://localhost:3000/api/sub-categories
-Content-Type: application/json
-
-{
-        "id": 12,
-        "name": "kosketinsoittimet",
-        "categoryId": 10
-}
-
 
 ### Post all categories and subcategories
 POST http://localhost:3000/api/bulk-categories
 Content-Type: application/json
+
 {
     "categories": [
         {
@@ -90,4 +72,23 @@ Content-Type: application/json
             ]
         }
     ]
+}
+
+### Post new category
+POST http://localhost:3000/api/categories
+Content-Type: application/json
+
+{
+    "id": "e5811ce3-a7c8-4bdc-83e0-99b6965815d1",
+    "name": "musiikki"
+}
+
+### Post new category
+POST http://localhost:3000/api/sub-categories
+Content-Type: application/json
+
+{
+        "id": "53e0c057-c8d3-4a5a-847d-1f907f4c2907",
+        "name": "kosketinsoittimet",
+        "categoryId": "e5811ce3-a7c8-4bdc-83e0-99b6965815d1"
 }

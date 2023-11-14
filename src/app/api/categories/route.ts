@@ -5,7 +5,7 @@ import { NextResponse, NextRequest } from "next/server";
 
 
 type TCategory = {
-    id: number;
+    id: string;
     name: string;
 }
 

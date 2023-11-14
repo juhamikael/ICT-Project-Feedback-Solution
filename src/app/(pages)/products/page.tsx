@@ -1,7 +1,7 @@
 "use client";
+import { useEffect, useState } from "react";
 import { CldImage } from "next-cloudinary";
-import { products } from "@/data/products";
-import { useState, useEffect } from "react";
+import Link from "next/link";
 import _ from "lodash";
 import {
   Select,
@@ -10,65 +10,87 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import zoom from "@/styles/zoom.module.css";
 import { Card, CardDescription, CardHeader } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import Link from "next/link";
+import { cn } from "@/lib/utils";
+import zoom from "@/styles/zoom.module.css";
 
-import type { TProduct, TAllProducts } from "@/types/product";
+// import type { TProduct } from "@/types/product";
+
+type TCategory = {
+  id: string;
+  name: string;
+};
+
+type TProduct = {
+  id: string;
+  imageId: string;
+  name: string;
+  price: number;
+  description: string;
+  quantity: number;
+  categoryId: number | string | null;
+  subCategoryId: number | string | null;
+};
 
 const Products = () => {
-  const [selectedPrice, setSelectedPrice] = useState<number | null>(null);
+  const [selectedPrice, setSelectedPrice] = useState<number | null | string>(
+    null
+  );
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [filteredProducts, setFilteredProducts] = useState<TProduct[]>([]);
-
-  const allProducts = products[0] as TAllProducts;
-
-  const setFilters = () => {
-    let newFilteredProducts: TProduct[] = [];
-    Object.keys(allProducts).forEach((category) => {
-      allProducts[category].forEach((productInfo: any) => {
-        if (productInfo.products) {
-          productInfo.products.forEach((product: TProduct) => {
-            if (
-              (!selectedPrice || product.price <= selectedPrice) &&
-              (!selectedCategory || category === selectedCategory)
-            ) {
-              newFilteredProducts.push(product);
-            }
-          });
-        }
-      });
-    });
-    setFilteredProducts(newFilteredProducts);
-  };
+  const [dbProducts, setDbProducts] = useState<TProduct[]>([]);
+  const [categories, setCategories] = useState<TCategory[]>([]);
 
   useEffect(() => {
-    setFilters();
-  }, [selectedPrice, selectedCategory]);
+    const fetchProducts = async () => {
+      const res = await fetch("/api/products");
+      const data = await res.json();
+      setDbProducts(data.body.products);
+    };
 
-  const setFilteredPrice = (value: string) => {
-    if (value === "kaikki") {
-      setSelectedPrice(null);
-      return;
-    }
-    setSelectedPrice(Number(value));
-  };
+    const fetchCategories = async () => {
+      const res = await fetch("/api/categories");
+      const data = await res.json();
+      setCategories(data.body);
+    };
 
-  const setFilteredCategory = (value: string) => {
-    if (value === "kaikki") {
-      setSelectedCategory(null);
-      return;
-    }
-    setSelectedCategory(value);
+    fetchCategories();
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    const newFilteredProducts = dbProducts.filter((product) => {
+      // if selectedPrice is number
+
+      const matchesPrice =
+        selectedPrice === "kaikki" ||
+        selectedPrice === null ||
+        product.price <= parseInt(selectedPrice);
+
+      // Check if there is a category filter
+      const matchesCategory =
+        selectedCategory === null ||
+        selectedCategory === "kaikki" ||
+        product.categoryId?.toString() === selectedCategory;
+
+      return matchesPrice && matchesCategory;
+    });
+
+    setFilteredProducts(newFilteredProducts);
+  }, [selectedPrice, selectedCategory, dbProducts]);
+
+  // Match category id to category name
+  const getCategoryName = (categoryId: string) => {
+    const category = categories.find((category) => category.id === categoryId);
+    return _.capitalize(category?.name);
   };
   return (
     <MaxWidthWrapper>
       <div className="flex flex-col md:flex-row justify-around">
         <div className="md:w-1/4 md:px-4">
           <div className="flex flex-col gap-y-2">
-            <Select onValueChange={(e) => setFilteredPrice(e)}>
+            <Select onValueChange={(e) => setSelectedPrice(e)}>
               <SelectTrigger>
                 <SelectValue placeholder="Hinta" />
               </SelectTrigger>
@@ -80,16 +102,15 @@ const Products = () => {
               </SelectContent>
             </Select>
 
-            <Select onValueChange={(e) => setFilteredCategory(e)}>
+            <Select onValueChange={(e) => setSelectedCategory(e)}>
               <SelectTrigger>
                 <SelectValue placeholder="Kategoria" />
               </SelectTrigger>
-
               <SelectContent>
                 <SelectItem value="kaikki">Kaikki</SelectItem>
-                {Object.keys(allProducts).map((category, index) => (
-                  <SelectItem key={index} value={category}>
-                    {_.capitalize(category)}
+                {categories.map((category) => (
+                  <SelectItem key={category.id} value={category.id.toString()}>
+                    {_.capitalize(category.name)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -99,14 +120,18 @@ const Products = () => {
 
         <div className="w-full md:w-3/4">
           <div className="pb-6 font-bold">
-            {selectedCategory ? _.capitalize(selectedCategory) : "Kaikki"}{" "}
-            {selectedPrice ? `alle ${selectedPrice} €` : ""}
+            {selectedCategory
+              ? getCategoryName(selectedCategory)
+              : "Kaikki tuotteet"}{" "}
+            {selectedPrice && selectedPrice !== "kaikki"
+              ? `alle ${selectedPrice} €`
+              : ""}
           </div>
           <div className="grid md:grid-cols-3 gap-x-10 gap-y-10">
             {filteredProducts.map((product, index) => (
               <Link
                 className={cn("cursor-pointer", zoom.zoom)}
-                href={`products/${product.productType}/${product.id}`}
+                href={`products/${product.id}`}
                 key={index}
               >
                 <Card className={cn("rounded-xl")}>

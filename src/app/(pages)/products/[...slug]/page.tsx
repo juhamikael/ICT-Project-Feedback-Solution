@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { CldImage } from "next-cloudinary";
 
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { products } from "@/data/products";
 
 import type { TProduct, TAllProducts, TProductInfo } from "@/types/product";
@@ -26,26 +26,28 @@ type TSingleProductProps = {
 };
 
 const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
-  const productType = params.slug[0];
-  const productId = params.slug[1];
+  const productId = params.slug[0];
+  const [product, setProduct] = useState<TProduct | null>(null);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const res = await fetch("/api/products");
+      const data = await res.json();
 
-  const productData: TAllProducts = products[0];
-  let foundProduct: TProduct | null = null;
+      // match params.slug[0] to product.id
 
-  Object.keys(productData).forEach((category) => {
-    productData[category].forEach((productInfo: TProductInfo) => {
-      const product = productInfo.products.find((p) => p.id === productId);
-      if (product) {
-        foundProduct = product;
-      }
-    });
-  });
+      const product = data.body.products.find(
+        (product: TProduct) => product.id === productId
+      );
 
-  if (!foundProduct) {
+      setProduct(product);
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (!product) {
     return <div>Product not found</div>;
   }
-
-  const safeProduct = foundProduct as TProduct;
 
   return (
     <MaxWidthWrapper>
@@ -59,9 +61,9 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
               width="1024"
               height="1024"
               className="rounded-tl-2xl md:rounded-bl-2xl w-full"
-              src={safeProduct.imageId}
+              src={product?.imageId || ""}
               crop="scale"
-              alt={safeProduct.description}
+              alt={product.description}
             />
           </div>
           <Card
@@ -71,17 +73,21 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
           >
             <CardHeader>
               <div className="flex justify-between">
-                <CardTitle>{safeProduct.name}</CardTitle>
+                <CardTitle>{product.name}</CardTitle>
                 <CardDescription>
-                  {_.capitalize(safeProduct.productType)}
+                  {_.capitalize(product.productType)}
                 </CardDescription>
               </div>
-              <CardDescription>{safeProduct.description}</CardDescription>
+              <CardDescription>{product.description}</CardDescription>
             </CardHeader>
             <CardContent className={cn("")}>
               <div className="flex justify-between">
-                <div className="font-black">{safeProduct.price} €</div>
-                <div>{safeProduct.quantity} kpl</div>
+                <div className="font-black">{product.price} €</div>
+                <div>
+                  {product.quantity > 0
+                    ? `${product.quantity} kpl`
+                    : "Tilapäisesti loppu"}
+                </div>
               </div>
             </CardContent>
             <CardFooter className={"md:absolute md:bottom-0"}>
@@ -89,7 +95,7 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
                 <CardDescription className="font-bold">
                   Tuotekoodi
                 </CardDescription>
-                <CardDescription>{safeProduct.id}</CardDescription>
+                <CardDescription>{product.id}</CardDescription>
               </div>
             </CardFooter>
           </Card>
