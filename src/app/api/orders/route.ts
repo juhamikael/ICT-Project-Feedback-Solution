@@ -5,6 +5,8 @@ import { eq } from "drizzle-orm";
 import { Quattrocento } from "next/font/google";
 import { NextResponse, NextRequest } from "next/server";
 
+import { v4 } from "uuid";
+
 type Order = {
     id: number;
     userId: number | null;
@@ -25,8 +27,8 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
-    const product = db.select().from(products).where(eq(products.id, body.id)).get();
-    
+    const product = db.select().from(products).where(eq(products.id, body.productId)).get();
+
     if (!product) {
         return NextResponse.json({
             status: 400,
@@ -49,12 +51,27 @@ export async function POST(req: NextRequest) {
             body: "Not enough products in stock"
         })
     }
+    const orderId = v4();
 
+    db.update(products).set({ quantity: quantityAfterOrder }).where(eq(products.id, body.productId)).run();
 
-    db.insert(products).values(body).run();
+    db.insert(orders).values({
+        id: orderId,
+        userId: body.userId,
+        status: "pending",
+        totalPrice: product.price * body.quantity
+    }).run();
+
+    db.insert(orderDetails).values({
+        id: v4(),
+        orderId: orderId,
+        productId: body.productId,
+        quantity: body.quantity
+    }).run();
+
 
     return NextResponse.json({
         status: 200,
-        body: body
+        body: product
     });
 }
