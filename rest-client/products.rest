@@ -7,6 +7,7 @@ GET http://localhost:3000/api/products/1
 ### POST product### POST product
 POST http://localhost:3000/api/products/ HTTP/1.1
 Content-Type: application/json
+
 {
     "id": 3,
     "imageId": "cd879f3e-bbf0-4f49-befb-ccb2b6c7a990_jitspk",
@@ -40,7 +41,7 @@ POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-  "id": "4",
+  "id": "5",
   "imageId": "0e2ddb72-97c6-4b9a-9640-f1e91f5fe4d3_l2fhun",
   "name": "AcmePhone 10",
   "price": 599,

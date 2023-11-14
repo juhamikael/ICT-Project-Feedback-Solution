@@ -9,7 +9,7 @@ POST http://localhost:3000/api/categories
 Content-Type: application/json
 
 {
-    "id": 11,
+    "id": 13,
     "name": "musiikki"
 }
 
@@ -18,15 +18,16 @@ POST http://localhost:3000/api/sub-categories
 Content-Type: application/json
 
 {
-        "id": 12,
+        "id": 23,
         "name": "kosketinsoittimet",
-        "categoryId": 10
+        "categoryId": 13
 }
 
 
 ### Post all categories and subcategories
 POST http://localhost:3000/api/bulk-categories
 Content-Type: application/json
+
 {
     "categories": [
         {
