@@ -1,5 +1,5 @@
 CREATE TABLE `feedback` (
-	`id` integer PRIMARY KEY NOT NULL,
+	`id` text PRIMARY KEY NOT NULL,
 	`orderId` integer,
 	`rating` integer NOT NULL,
 	`comment` text,
@@ -7,8 +7,8 @@ CREATE TABLE `feedback` (
 );
 --> statement-breakpoint
 CREATE TABLE `orderDetails` (
-	`id` integer PRIMARY KEY NOT NULL,
-	`orderId` integer,
+	`id` text PRIMARY KEY NOT NULL,
+	`orderId` text,
 	`productId` integer,
 	`quantity` integer NOT NULL,
 	FOREIGN KEY (`orderId`) REFERENCES `orders`(`id`) ON UPDATE no action ON DELETE cascade,

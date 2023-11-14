@@ -11,7 +11,7 @@ export const orders = sqliteTable("orders", {
 
 export const orderDetails = sqliteTable("orderDetails", {
     id: text("id").primaryKey(),
-    orderId: integer("orderId").references(() => orders.id, { onDelete: "cascade" }),
+    orderId: text("orderId").references(() => orders.id, { onDelete: "cascade" }),
     productId: integer("productId").references(() => products.id, { onDelete: "cascade" }),
     quantity: integer("quantity").notNull()
 });

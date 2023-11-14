@@ -1,7 +1,7 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "4a889d00-9653-4ed3-a31a-27cacce39d8d",
+  "id": "33feadcc-d3df-464e-b4f3-bc9f8606b177",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "feedback": {
@@ -9,7 +9,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "text",
           "primaryKey": true,
           "notNull": true,
           "autoincrement": false
@@ -60,14 +60,14 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "text",
           "primaryKey": true,
           "notNull": true,
           "autoincrement": false
         },
         "orderId": {
           "name": "orderId",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false

@@ -1,8 +1,8 @@
 import { db } from "@/lib/db";
 import { orderDetails, orders } from "@/lib/db/schema/orders";
+import { users } from "@/lib/db/schema/users";
 import { products, categories, subcategories, productIdSchema } from "@/lib/db/schema/product";
 import { eq } from "drizzle-orm";
-import { Quattrocento } from "next/font/google";
 import { NextResponse, NextRequest } from "next/server";
 
 import { v4 } from "uuid";
@@ -28,7 +28,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
     const body = await req.json();
     const product = db.select().from(products).where(eq(products.id, body.productId)).get();
-
+    const user = db.select().from(users).where(eq(users.id, body.userId)).get();
     if (!product) {
         return NextResponse.json({
             status: 400,
@@ -51,8 +51,16 @@ export async function POST(req: NextRequest) {
             body: "Not enough products in stock"
         })
     }
-    const orderId = v4();
 
+    if (!user) {
+        return NextResponse.json({
+            status: 400,
+            body: "User not found"
+        });
+    }
+
+    const orderId = v4();
+    console.log("orderId", orderId)
     db.update(products).set({ quantity: quantityAfterOrder }).where(eq(products.id, body.productId)).run();
 
     db.insert(orders).values({
