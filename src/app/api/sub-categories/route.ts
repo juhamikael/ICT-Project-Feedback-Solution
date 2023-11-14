@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import { NextResponse, NextRequest } from "next/server";
 
 type TSubCategory = {
-    id: number;
+    id: string;
     name: string;
     categoryId: number | null;
 }
