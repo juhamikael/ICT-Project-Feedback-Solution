@@ -35,8 +35,8 @@ CREATE TABLE `products` (
 	`price` integer NOT NULL,
 	`description` text,
 	`quantity` integer NOT NULL,
-	`categoryId` integer,
-	`subcategoryId` integer,
+	`categoryId` text,
+	`subcategoryId` text,
 	FOREIGN KEY (`categoryId`) REFERENCES `categories`(`id`) ON UPDATE no action ON DELETE cascade,
 	FOREIGN KEY (`subcategoryId`) REFERENCES `subcategories`(`id`) ON UPDATE no action ON DELETE cascade
 );
