@@ -45,10 +45,18 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
     fetchProducts();
   }, []);
 
+  const getDescriptionLines = (description: string) => {
+    return description.split("\n").map((line, index: number) => (
+      <p className="my-2" key={index}>
+        {line}
+      </p>
+    ));
+  };
+
   if (!product) {
     return <div>Product not found</div>;
   }
-
+  console.log(product.description);
   return (
     <MaxWidthWrapper>
       <div className="flex flex-col gap-y-4">
@@ -56,19 +64,17 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
           Takaisin
         </Link>
         <div className="flex flex-col lg:flex-row justify-center">
-          <div>
-            <CldImage
-              width="1024"
-              height="1024"
-              className="rounded-tl-2xl md:rounded-bl-2xl w-full"
-              src={product?.imageId || ""}
-              crop="scale"
-              alt={product.description}
-            />
-          </div>
+          <CldImage
+            width="512"
+            height="512"
+            className="rounded-tl-2xl md:rounded-bl-2xl w-full"
+            src={product?.imageId || ""}
+            crop="scale"
+            alt={product.description}
+          />
           <Card
             className={cn(
-              "relative rounded-none w-full md:rounded-tr-2xl rounded-br-2xl "
+              "relative rounded-none w-full md:rounded-tr-2xl rounded-br-2xl bg-transparent "
             )}
           >
             <CardHeader>
@@ -78,9 +84,8 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
                   {_.capitalize(product.productType)}
                 </CardDescription>
               </div>
-              <CardDescription>{product.description}</CardDescription>
             </CardHeader>
-            <CardContent className={cn("")}>
+            <CardContent className={cn("flex-grow py-2")}>
               <div className="flex justify-between">
                 <div className="font-black">{product.price} €</div>
                 <div>
@@ -89,6 +94,9 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
                     : "Tilapäisesti loppu"}
                 </div>
               </div>
+              <CardDescription className={cn("text-base")}>
+                {getDescriptionLines(product.description)}
+              </CardDescription>
             </CardContent>
             <CardFooter className={"md:absolute md:bottom-0"}>
               <div className="flex flex-col">
