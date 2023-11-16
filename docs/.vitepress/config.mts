@@ -18,8 +18,16 @@ export default defineConfig({
           { text: 'Ohjeet', link: '/ohjeet' },
           { text: 'Projektin Rakenne', link: '/rakenne' },
           { text: 'Projektin Eteneminen', link: '/eteneminen' },
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          {
+            text: "Muut",
+            collapsed: true,
+
+            items: [
+              { text: "NPM Paketit", link: '/npm-paketit' }
+            ]
+          },
+          // { text: 'Markdown Examples', link: '/markdown-examples' },
+          // { text: 'Runtime API Examples', link: '/api-examples' }
         ]
       }
     ],
