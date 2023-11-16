@@ -6,7 +6,7 @@ import { NextResponse, NextRequest } from "next/server";
 type TSubCategory = {
     id: string;
     name: string;
-    categoryId: number | null;
+    categoryId: string | null;
 }
 
 export async function GET() {

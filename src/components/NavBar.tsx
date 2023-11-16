@@ -9,6 +9,7 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/server";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import UserButton from "./thirdPartyComponents/kinde-starter/UserButton";
+import AddProductSheet from "./add-product";
 const NavBar = async ({}) => {
   const { getUser, isAuthenticated, getPermission } = getKindeServerSession();
   const getPermissionFlag = getPermission("add-products");
@@ -37,7 +38,7 @@ const NavBar = async ({}) => {
         {userAuthenticated ? (
           <div className="flex gap-x-4 items-center">
             {getPermissionFlag.isGranted && (
-              <Link href="/add-products">Lisää tuote</Link>
+              <AddProductSheet title="Lisää tuote" />
             )}
             <UserButton isAuthenticated={userAuthenticated} user={user} />
           </div>

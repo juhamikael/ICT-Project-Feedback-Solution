@@ -92,3 +92,15 @@ Content-Type: application/json
         "name": "kosketinsoittimet",
         "categoryId": "e5811ce3-a7c8-4bdc-83e0-99b6965815d1"
 }
+
+### Post new category
+POST http://localhost:3000/api/sub-categories
+Content-Type: application/json
+
+{
+    "id": "f4a556e8-2307-460a-885c-5e78e1c3e022 ",
+    "name": "peilit",
+    "categoryId": "feba1df5-4f00-489f-8a6f-db4f381e2e7b"
+}
+
+

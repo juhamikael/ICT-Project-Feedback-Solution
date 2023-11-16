@@ -60,22 +60,21 @@ const Products = () => {
   }, []);
 
   useEffect(() => {
-    const newFilteredProducts = dbProducts.filter((product) => {
-      // if selectedPrice is number
+    const newFilteredProducts = dbProducts
+      .filter((product) => {
+        const matchesPrice =
+          selectedPrice === "kaikki" ||
+          selectedPrice === null ||
+          product.price <= parseInt(selectedPrice, 10);
 
-      const matchesPrice =
-        selectedPrice === "kaikki" ||
-        selectedPrice === null ||
-        product.price <= parseInt(selectedPrice);
+        const matchesCategory =
+          selectedCategory === null ||
+          selectedCategory === "kaikki" ||
+          product.categoryId?.toString() === selectedCategory;
 
-      // Check if there is a category filter
-      const matchesCategory =
-        selectedCategory === null ||
-        selectedCategory === "kaikki" ||
-        product.categoryId?.toString() === selectedCategory;
-
-      return matchesPrice && matchesCategory;
-    });
+        return matchesPrice && matchesCategory;
+      })
+      .sort((a, b) => a.price - b.price);
 
     setFilteredProducts(newFilteredProducts);
   }, [selectedPrice, selectedCategory, dbProducts]);
@@ -134,7 +133,7 @@ const Products = () => {
                 href={`products/${product.id}`}
                 key={index}
               >
-                <Card className={cn("rounded-xl")}>
+                <Card className={cn("rounded-xl bg-transparent")}>
                   <CldImage
                     width="1024"
                     height="1024"
@@ -145,9 +144,6 @@ const Products = () => {
                   />
                   <CardHeader>
                     <CardDescription>
-                      <div className="text-sm font-medium">
-                        {_.capitalize(product.productType)}
-                      </div>
                       <div className="text-lg font-medium">{product.name}</div>
                       <div className="text-lg font-black">
                         {product.price} €

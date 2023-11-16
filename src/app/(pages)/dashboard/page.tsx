@@ -9,7 +9,7 @@ type TDashboardProps = {
 };
 
 const Dashboard: FC<TDashboardProps> = ({}) => {
-  const btnStyle = "border border-b rounded-none text-black ";
+  const btnStyle = "border border-b rounded-none text-white ";
   return (
     <MaxWidthWrapper>
       <div className="flex flex-col md:flex-row">

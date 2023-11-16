@@ -15,8 +15,8 @@ Content-Type: application/json
     "price": 4990,
     "description": "Acme Watch 3, tilanteeseen kuin tilanteeseen",
     "quantity": 30,
-    "categoryId": "2670fd44-1cfa-4234-9c0a-bb2206102efe",
-    "subcategoryId": "cee1b4de-bd44-484e-b9a5-7d65421dce46"
+    "categoryId": "9d6c63d5-c7c1-4f3b-9c50-dec410560d53",
+    "subcategoryId": "6a983d70-ee4c-4ea0-8ccc-4e0f916bd69e"
 }
 
 ###
@@ -31,8 +31,8 @@ Content-Type: application/json
   "price": 399,
   "description": "Kaunis kello joka sopii kaikille",
   "quantity": 30,
-  "categoryId": "2670fd44-1cfa-4234-9c0a-bb2206102efe",
-  "subcategoryId": "cee1b4de-bd44-484e-b9a5-7d65421dce46"
+  "categoryId": "9d6c63d5-c7c1-4f3b-9c50-dec410560d53",
+  "subcategoryId": "6a983d70-ee4c-4ea0-8ccc-4e0f916bd69e"
 }
 
 ###
@@ -47,8 +47,8 @@ Content-Type: application/json
   "price": 599,
   "description": "Vanhempi AcmePhone, 7G, Huikea äänentoisto sekä USB-C yhteensopiva",
   "quantity": 15,
-  "categoryId": "6e780eba-f3f2-4c5f-b0b0-0b892a0bde7d",
-  "subcategoryId": "d4284ac8-41cb-4c11-8ec1-de283b6c2389"
+  "categoryId": "05c16100-2186-4c48-a732-dbfdda384597",
+  "subcategoryId": "af36b101-843f-42ff-a696-c7a8a3434513"
 }
 
 ###
@@ -63,8 +63,8 @@ Content-Type: application/json
   "price": 1290,
   "description": "The best laptop ever",
   "quantity": 15,
-  "categoryId": "b6522c16-6fa6-4ffc-b18b-46a218dbd92c",
-  "subcategoryId": "dc435277-d7d9-4624-bf34-77aefe2efc75"
+  "categoryId": "590bcc41-9f5e-43cd-a669-4c1caa3dda31",
+  "subcategoryId": "582c8a07-6fb7-4841-b32d-af73efd8eefe"
 }
 
 ###
@@ -79,8 +79,8 @@ Content-Type: application/json
   "price": 659,
   "description": "Moderni jääkaappi kaikiin tarpeisiin",
   "quantity": 10,
-  "categoryId": "d65f64dd-1f97-46da-b197-19d9b04e7a8b",
-  "subcategoryId": "c0f4e4d1-913f-4f19-b4f7-a4a5a9383325"
+  "categoryId": "feba1df5-4f00-489f-8a6f-db4f381e2e7b",
+  "subcategoryId": "5eb42697-fe9a-483a-9ec2-1a535de17e2e"
 }
 
 ###
@@ -95,8 +95,8 @@ Content-Type: application/json
   "price": 149,
   "description": "Moderni siivousrobotti, erittäin hiljainen",
   "quantity": 20,
-  "categoryId": "d65f64dd-1f97-46da-b197-19d9b04e7a8b",
-  "subcategoryId": "2081e79c-d9b5-4319-92a7-5c64f9ac2e42"
+  "categoryId": "feba1df5-4f00-489f-8a6f-db4f381e2e7b",
+  "subcategoryId": "ffc43a26-5a9f-476a-930f-98c26a372c4b"
 }
 
 ###
@@ -111,8 +111,8 @@ Content-Type: application/json
   "price": 998,
   "description": "The best camera ever",
   "quantity": 15,
-  "categoryId": "6762b4fe-bcac-4367-bbc9-23f0f398c800",
-  "subcategoryId": "0448a6d5-eb34-436f-868e-e2a6da88f3d3"
+  "categoryId": "70ff50ea-dd81-4b49-83ca-80c311cf942f",
+  "subcategoryId": "536ac941-2db0-4e61-a0ff-15cdf30cecaa"
 }
 
 ###
@@ -127,6 +127,6 @@ Content-Type: application/json
   "price": 199,
   "description": "Bluetooth kuulokkeet langattomalla latauksella, laadukas ääni",
   "quantity": 80,
-  "categoryId": "a4de2f74-c54e-472b-8503-df061451328f",
-  "subcategoryId": "eb2e8a97-722d-4c24-b9ba-e049c77b0c68"
+  "categoryId": "357903be-cbcc-4992-9a44-9da44b3e2d1b",
+  "subcategoryId": "234a8b90-441e-4a8b-9a90-a8732378af1f"
 }

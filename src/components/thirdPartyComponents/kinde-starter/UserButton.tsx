@@ -4,7 +4,6 @@ import clsx from "clsx";
 import Link from "next/link";
 import Image from "next/image";
 
-// @ts-ignore
 import { Menu, Transition } from "@headlessui/react";
 
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/server";
@@ -47,7 +46,7 @@ export default function UserButton({
             leaveFrom="transform scale-100 opacity-100"
             leaveTo="transform scale-95 opacity-0"
           >
-            <Menu.Items className="bg-white z-10 border border-black/5 dark:text-react absolute right-0 mt-1 flex w-96 origin-top-right flex-col rounded-xl py-6 text-white shadow-lg focus:outline-none dark:bg-white">
+            <Menu.Items className="bg-card-foreground z-10 border border-black/5 absolute right-0 mt-1 flex w-96 origin-top-right flex-col rounded-xl py-6 text-background shadow-lg focus:outline-none ">
               <div className="mb-4 flex gap-4 px-6 text-sm">
                 {user?.picture ? (
                   <div className="relative h-10 w-10">
@@ -78,11 +77,11 @@ export default function UserButton({
                   <Link
                     href="/dashboard"
                     className={clsx(
-                      active && "bg-stone-700/50 dark:bg-stone-200",
-                      "inline-flex items-center gap-6 px-[34px] py-2 text-sm text-stone-400 hover:text-white dark:text-stone-500 dark:hover:text-white"
+                      active && "bg-stone-700/50 dark:bg-stone-300",
+                      "inline-flex items-center gap-6 px-[34px] py-2 text-sm text-stone-600"
                     )}
                   >
-                    <span>Hallitse Tiliä</span>
+                    <span>Profiili</span>
                   </Link>
                 )}
               </Menu.Item>
@@ -91,8 +90,8 @@ export default function UserButton({
                   <Link
                     href="/api/auth/logout"
                     className={clsx(
-                      active && "bg-stone-700/50 dark:bg-stone-200",
-                      "inline-flex items-center gap-6 px-[34px] py-2 text-sm text-stone-400 hover:text-white dark:text-stone-500 dark:hover:text-white"
+                      active && "bg-stone-700/50 dark:bg-stone-300",
+                      "inline-flex items-center gap-6 px-[34px] py-2 text-sm text-stone-600 "
                     )}
                   >
                     <span>Kirjaudu Ulos</span>

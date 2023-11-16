@@ -10,8 +10,8 @@ export const products = sqliteTable("products", {
     price: integer("price").notNull(),
     description: text("description"),
     quantity: integer("quantity").notNull(),
-    categoryId: integer("categoryId").references(() => categories.id, { onDelete: "cascade" }),
-    subcategoryId: integer("subcategoryId").references(() => subcategories.id, { onDelete: "cascade" }),
+    categoryId: text("categoryId").references(() => categories.id, { onDelete: "cascade" }),
+    subcategoryId: text("subcategoryId").references(() => subcategories.id, { onDelete: "cascade" }),
 });
 
 export const categories = sqliteTable("categories", {
