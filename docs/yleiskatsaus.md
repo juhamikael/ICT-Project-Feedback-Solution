@@ -1,5 +1,7 @@
 # Yleiskatsaus projektista
 
+![Landing Page](public/landing-page.png)
+
 ## Teknologiat
 
 ### Frontend
