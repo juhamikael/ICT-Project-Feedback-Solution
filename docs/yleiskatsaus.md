@@ -22,6 +22,7 @@
 ### Muut
 
 - Autentikointi: [Kinde](https://kinde.com/)
+- API Testaus: [Postman](https://www.postman.com/)
 - Design: [Figma](https://www.figma.com/file/c1rTiFe2RW8bAWI3Fp0uq8/Untitled?type=design&node-id=0%3A1&mode=design&t=YquwgrzKO4fnRh9e-1)
 - Dokumentaatio: [Vitepress](https://vitepress.vuejs.org/)
 - SQL Editor: [Beekeeper Studio](https://www.beekeeperstudio.io/)
