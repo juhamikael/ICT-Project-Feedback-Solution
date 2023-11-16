@@ -15,6 +15,7 @@ export default defineConfig({
       {
         items: [
           { text: 'Yleiskatsaus', link: '/yleiskatsaus' },
+          { text: 'Ohjeet', link: '/ohjeet' },
           { text: 'Projektin Rakenne', link: '/rakenne' },
           { text: 'Projektin Eteneminen', link: '/eteneminen' },
           { text: 'Markdown Examples', link: '/markdown-examples' },
