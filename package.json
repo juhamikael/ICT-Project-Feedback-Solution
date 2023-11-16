@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "next lint",
     "db:generate": "drizzle-kit generate:sqlite",
-    "db:migrate": "tsx src/lib/db/migrate.ts"
+    "db:migrate": "tsx src/lib/db/migrate.ts",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
@@ -48,6 +51,7 @@
     "postcss": "^8",
     "tailwindcss": "^3",
     "tsx": "^3.14.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitepress": "^1.0.0-rc.25"
   }
 }
