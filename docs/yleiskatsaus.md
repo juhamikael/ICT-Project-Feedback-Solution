@@ -38,7 +38,7 @@ Ryhmän oli tarkoitus alunperin luoda "Feedback Solution" [Power](https://www.po
 Kuitenkin, meistä riippumattomista syistä projektia ei koskaan saatu käyntiin, joten päädyimme luomaan samantyyppisen ratkaisun, mutta Next.js:llä.
 Koska feedback solution yksinään olisi ollut aivan liian pieni kokonaisuus kurssin vaatimuksiin nähden, päätimme laajentaa projektia ja luoda kokonaisen verkkokaupan jossa feedback solution olisi vain yksi osa.
 
-<!-- Projekti eteni Semi Scrum tyyppisesti, joissa jokaiselle sprintille luotiin GitHubissa oma milestone ja määriteltiin niille issuet, koska ryhmässä on vain 2 jäsentä, ei varsinaista scrum masteria tai scrum meetingtejä ollut, vaan molemmat osapuolet olivat tietoisia projektin tilanteesta ja etenemisestä GitHubin projects boardin kautta. -->
+Projekti eteni Semi Scrum tyyppisesti, joissa jokaiselle sprintille luotiin GitHubissa oma milestone ja määriteltiin niille issuet, koska ryhmässä on vain 2 jäsentä, ei varsinaista scrum masteria tai scrum meetingtejä ollut, vaan molemmat osapuolet olivat tietoisia projektin tilanteesta ja etenemisestä GitHubin projects boardin kautta.
 
 ## Korvaavan Projektin konfigurointi ja suunnittelu
 
