@@ -27,6 +27,8 @@
 - Dokumentaatio: [Vitepress](https://vitepress.vuejs.org/)
 - SQL Editor: [Beekeeper Studio](https://www.beekeeperstudio.io/)
 
+Tarkempi listaus NPM paketeista [NPM Paketit](/npm-paketit.md)
+
 ## Projektin tavoite tiivistettynä
 
 Ryhmän oli tarkoitus alunperin luoda "Feedback Solution" [Power](https://www.power.fi/) verkkokaupalle, ratkaisu oli tarkoitus toteuttaa Angularilla. Projektin, eli "Feedback solutionin" perus idea oli mahdollistaa palautteen anto onnistuneen (tuote toimitettu asiakkaalle) tilauksen jälkeen.
