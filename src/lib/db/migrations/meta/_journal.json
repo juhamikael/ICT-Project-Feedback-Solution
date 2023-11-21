@@ -1,12 +1,26 @@
 {
   "version": "5",
-  "dialect": "sqlite",
+  "dialect": "pg",
   "entries": [
     {
       "idx": 0,
       "version": "5",
-      "when": 1700511473720,
-      "tag": "0000_jazzy_ted_forrester",
+      "when": 1700527647175,
+      "tag": "0000_left_legion",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1700528764616,
+      "tag": "0001_low_ego",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1700528966228,
+      "tag": "0002_wide_jasper_sitwell",
       "breakpoints": true
     }
   ]

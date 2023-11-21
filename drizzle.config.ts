@@ -1,10 +1,10 @@
 import type { Config } from "drizzle-kit";
 
 export default {
-    schema: "./src/lib/db/schema",
-    out: "./src/lib/db/migrations",
-    driver: "better-sqlite",
+    schema: "src/lib/db/schema",
+    out: "src/lib/db/migrations",
+    driver: "pg",
     dbCredentials: {
-        url: "sqlite.db"
-    }
+        connectionString: process.env.DB_HOST!,
+    },
 } satisfies Config;
