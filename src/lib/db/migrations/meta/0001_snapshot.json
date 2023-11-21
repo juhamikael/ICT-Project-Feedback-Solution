@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "3b8420a0-2e0c-4a67-a136-195d253514fa",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "a5903109-24d4-4644-92e1-ca368f75febe",
+  "prevId": "3b8420a0-2e0c-4a67-a136-195d253514fa",
   "tables": {
     "orderDetails": {
       "name": "orderDetails",
@@ -298,7 +298,7 @@
         },
         "last_login": {
           "name": "last_login",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false
         }

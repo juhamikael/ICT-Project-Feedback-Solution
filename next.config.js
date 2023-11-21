@@ -2,11 +2,22 @@
 const nextConfig = {
   // Allow images from these domains
   images: {
-    domains: ["localhost", "res.cloudinary.com", "lh3.googleusercontent.com"],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "avatars.githubusercontent.com",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
       },
     ],
   },

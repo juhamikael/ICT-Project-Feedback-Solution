@@ -1,0 +1,1 @@
+ALTER TABLE "orderDetails" ALTER COLUMN "orderDate" SET DATA TYPE timestamp;

@@ -1,8 +1,8 @@
-import { drizzle, BetterSQLite3Database } from "drizzle-orm/better-sqlite3";
-import Database from "better-sqlite3";
-import { migrate } from "drizzle-orm/better-sqlite3/migrator";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
+import { config } from 'dotenv';
+config({ path: '.env' });
 
-const sqlite = new Database("sqlite.db");
-export const db: BetterSQLite3Database = drizzle(sqlite);
-
-migrate(db, { migrationsFolder: "drizzle" });
+const connectionString = process.env.DB_HOST;
+const client = postgres(connectionString!);
+export const db = drizzle(client);
