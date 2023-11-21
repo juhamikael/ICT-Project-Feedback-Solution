@@ -17,7 +17,7 @@ CREATE TABLE `orderDetails` (
 --> statement-breakpoint
 CREATE TABLE `orders` (
 	`id` text PRIMARY KEY NOT NULL,
-	`userId` integer,
+	`userId` text,
 	`status` text NOT NULL,
 	`totalPrice` real NOT NULL,
 	FOREIGN KEY (`userId`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE cascade
