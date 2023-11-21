@@ -1,18 +1,7 @@
-"use client";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import RedirectUser from "@/components/redirectUser";
 
-export default function Home() {
-  const [user, setUser] = useState(null);
-  const router = useRouter();
-  return (
-    <>
-      {user ? (
-        <>{router.push("/dashboard")}</>
-      ) : (
-        <>{router.push("/products")}</>
-      )}
-    </>
-  );
+export default async function Home() {
+  const { isAuthenticated } = getKindeServerSession();
+  return <RedirectUser isAuthenticated={isAuthenticated()} />;
 }

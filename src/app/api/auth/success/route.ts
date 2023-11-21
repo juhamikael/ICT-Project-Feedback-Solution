@@ -3,7 +3,7 @@ import { users } from "@/lib/db/schema/users";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
-
+import { baseUrl } from "@/lib/config";
 export async function GET() {
     const { getUser } = getKindeServerSession();
     const user = getUser();
@@ -31,5 +31,7 @@ export async function GET() {
             })
             .where(eq(users.id, user.id));
     }
-    return NextResponse.redirect("http://localhost:3000/dashboard");
+    return NextResponse.redirect(`${baseUrl}/dashboard`);
 }
+
+

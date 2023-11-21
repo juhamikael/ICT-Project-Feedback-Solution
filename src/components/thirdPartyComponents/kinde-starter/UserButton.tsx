@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Menu, Transition } from "@headlessui/react";
 
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/server";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/server";
 
 export default function UserButton({
   isAuthenticated,
@@ -87,15 +88,14 @@ export default function UserButton({
               </Menu.Item>
               <Menu.Item>
                 {({ active }) => (
-                  <Link
-                    href="/api/auth/logout"
+                  <LogoutLink
                     className={clsx(
                       active && "bg-stone-700/50 dark:bg-stone-300",
                       "inline-flex items-center gap-6 px-[34px] py-2 text-sm text-stone-600 "
                     )}
                   >
                     <span>Kirjaudu Ulos</span>
-                  </Link>
+                  </LogoutLink>
                 )}
               </Menu.Item>
             </Menu.Items>
