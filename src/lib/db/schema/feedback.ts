@@ -1,19 +1,14 @@
-import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
-import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
-import { Graduate } from 'next/font/google';
-import { z } from 'zod';
-import { userIdSchema, users } from './users';
-import { orderDetails, orders } from './orders';
-import { sql } from "drizzle-orm";
+import { pgTable, text, timestamp, integer } from "drizzle-orm/pg-core";
+import { users } from './users';
+import { orders } from './orders';
 
-export const feedBack = sqliteTable("feedback", {
+export const feedBack = pgTable("feedback", {
     id: text("id").primaryKey(),
     grade: integer("grade"),
     feedback: text("feedback"),
     userId: text("userId").references(() => users.id, { onDelete: "cascade" }),
     orderId: text("orderId").references(() => orders.id, { onDelete: "cascade" }),
-    createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
+    createdAt: timestamp("orderDate").notNull()
 });
 
 
- 
