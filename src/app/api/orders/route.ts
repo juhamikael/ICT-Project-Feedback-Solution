@@ -8,8 +8,8 @@ import { NextResponse, NextRequest } from "next/server";
 import { v4 } from "uuid";
 
 type Order = {
-    id: number;
-    userId: number | null;
+    id: string;
+    userId: string | null;
     status: string;
     totalPrice: number;
 }

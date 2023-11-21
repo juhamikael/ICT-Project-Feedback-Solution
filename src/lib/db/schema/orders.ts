@@ -4,7 +4,7 @@ import { products } from './product';
 
 export const orders = sqliteTable("orders", {
     id: text("id").primaryKey(),
-    userId: integer("userId").references(() => users.id, { onDelete: "cascade" }),
+    userId: text("userId").references(() => users.id, { onDelete: "cascade" }),
     status: text("status").notNull(),
     totalPrice: real("totalPrice").notNull()
 });
