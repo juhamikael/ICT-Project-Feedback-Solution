@@ -23,7 +23,6 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@types/lodash": "^4.14.199",
     "axios": "^1.6.2",
-    "better-sqlite3": "^9.0.0",
     "class-variance-authority": "^0.7.0",
     "cloudinary-react": "^1.8.1",
     "clsx": "^2.0.0",
@@ -45,7 +44,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@types/better-sqlite3": "^7.6.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
