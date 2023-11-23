@@ -11,13 +11,15 @@ import {
 import { CldImage } from "next-cloudinary";
 
 import { FC, useEffect, useState } from "react";
-import { products } from "@/data/products";
 
-import type { TProduct, TAllProducts, TProductInfo } from "@/types/product";
+import type { TProduct } from "@/types/product";
 import { cn } from "@/lib/utils";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Link from "next/link";
 import _ from "lodash";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import OrderProductSheet from "@/components/order-product/OrderProductSheet";
 
 type TSingleProductProps = {
   params: {
@@ -28,35 +30,84 @@ type TSingleProductProps = {
 const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
   const productId = params.slug[0];
   const [product, setProduct] = useState<TProduct | null>(null);
+  const [errorText, setErrorText] = useState<string | null>(null);
+  const [loadingError, setLoadingError] = useState<boolean>(false);
+  const { isAuthenticated } = useKindeBrowserClient();
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await fetch("/api/products");
-      const data = await res.json();
+      try {
+        const res = await fetch(`/api/products/${productId}`);
+        console.log("Response Status:", res.status); // Debugging
 
-      // match params.slug[0] to product.id
+        if (res.status === 404) {
+          setLoadingError(true);
+          setErrorText("Tuotetta ei löytynyt");
+          return;
+        }
+        if (res.status !== 200) {
+          setLoadingError(true);
+          setErrorText("Tuotteen tietojen lataaminen epäonnistui");
+          return;
+        }
+        const data = await res.json();
 
-      const product = data.body.products.find(
-        (product: TProduct) => product.id === productId
-      );
-
-      setProduct(product);
+        if (data.body.product[0]) {
+          setProduct(data.body.product[0]);
+        } else {
+          setLoadingError(true);
+          setErrorText("Tuotetta ei löytynyt");
+        }
+      } catch (error) {
+        setLoadingError(true);
+        setErrorText("Virhe tuotteen tietoja ladattaessa");
+        console.error("Fetch Error:", error); // Debugging
+      }
     };
 
     fetchProducts();
-  }, []);
+  }, [productId]);
 
-  const getDescriptionLines = (description: string) => {
-    return description.split("\n").map((line, index: number) => (
+  const getDescriptionLines = (description: string | null | undefined) => {
+    if (!description) {
+      return null;
+    }
+
+    const unescapedDescription = description.replace(/\\n/g, "\n");
+    const normalizedDescription = unescapedDescription.replace(
+      /(\r\n|\r)/g,
+      "\n"
+    );
+    return normalizedDescription.split("\n\n").map((line, index) => (
       <p className="my-2" key={index}>
         {line}
       </p>
     ));
   };
+  if (loadingError) {
+    return (
+      <div className="flex justify-center">
+        <div className="text-center">
+          <p className="py-2 text-2xl">{errorText}</p>
+          <Link
+            className={buttonVariants({ variant: "default" })}
+            href="/products"
+          >
+            Takaisin
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   if (!product) {
-    return <div>Product not found</div>;
+    return (
+      <div className="flex justify-center text-2xl">
+        <p>Ladataan tuotteen tietoja...</p>
+      </div>
+    );
   }
-  console.log(product.description);
+  console.log(product);
+
   return (
     <MaxWidthWrapper>
       <div className="flex flex-col gap-y-4">
@@ -104,6 +155,9 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
                   Tuotekoodi
                 </CardDescription>
                 <CardDescription>{product.id}</CardDescription>
+                {isAuthenticated && (
+                  <OrderProductSheet productId={product.id} />
+                )}
               </div>
             </CardFooter>
           </Card>
