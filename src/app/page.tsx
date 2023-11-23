@@ -3,5 +3,6 @@ import RedirectUser from "@/components/redirectUser";
 
 export default async function Home() {
   const { isAuthenticated } = getKindeServerSession();
-  return <RedirectUser isAuthenticated={isAuthenticated()} />;
+  const isUserAuthenticated = await isAuthenticated();
+  return <RedirectUser isAuthenticated={isUserAuthenticated} />;
 }

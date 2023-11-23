@@ -6,16 +6,12 @@ import Image from "next/image";
 
 import { Menu, Transition } from "@headlessui/react";
 
-import { KindeUser } from "@kinde-oss/kinde-auth-nextjs/server";
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/server";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
-export default function UserButton({
-  isAuthenticated,
-  user,
-}: {
-  isAuthenticated: boolean;
-  user: KindeUser;
-}) {
+export default function UserButton({}: {}) {
+  const { user } = useKindeBrowserClient();
+  const { isAuthenticated } = useKindeBrowserClient();
   return (
     <>
       {isAuthenticated ? (
