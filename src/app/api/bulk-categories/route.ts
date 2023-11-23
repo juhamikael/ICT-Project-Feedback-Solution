@@ -9,16 +9,16 @@ export async function POST(req: NextRequest) {
 
     for (const categoryData of categoriesData) {
         const categoryId = v4();
-        db.insert(categories).values({ name: categoryData.name, id: categoryId }).run();
+        await db.insert(categories).values({ name: categoryData.name, id: categoryId });
 
         for (const subcategoryData of categoryData.subcategories) {
             const subcategoryId = v4();
 
-            db.insert(subcategories).values({
+            await db.insert(subcategories).values({
                 id: subcategoryId,
                 name: subcategoryData.name,
                 categoryId: categoryId,
-            }).run();
+            })
         }
     }
 

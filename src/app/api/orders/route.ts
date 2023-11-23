@@ -1,10 +1,9 @@
 import { db } from "@/lib/db";
 import { orderDetails, orders } from "@/lib/db/schema/orders";
 import { users } from "@/lib/db/schema/users";
-import { products, categories, subcategories, productIdSchema } from "@/lib/db/schema/product";
+import { products } from "@/lib/db/schema/product";
 import { eq } from "drizzle-orm";
 import { NextResponse, NextRequest } from "next/server";
-
 import { v4 } from "uuid";
 
 type Order = {
@@ -16,7 +15,6 @@ type Order = {
 
 export async function GET() {
     const result: Order[] = await db.select().from(orders);
-    console.log(result);
     return NextResponse.json({
         status: 200,
         body: {
@@ -27,8 +25,10 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
-    const product = db.select().from(products).where(eq(products.id, body.productId)).get();
-    const user = db.select().from(users).where(eq(users.id, body.userId)).get();
+    const product = await db.select().from(products).where(eq(products.id, body.productId))
+    const user = await db.select().from(users).where(eq(users.id, body.userId))
+    const orderId = v4();
+
     if (!product) {
         return NextResponse.json({
             status: 400,
@@ -36,9 +36,9 @@ export async function POST(req: NextRequest) {
         });
     }
 
-    const quantityAfterOrder = product.quantity - body.quantity;
+    const quantityAfterOrder = product[0].quantity - body.quantity;
 
-    if (product.quantity === 0) {
+    if (product[0].quantity === 0) {
         return NextResponse.json({
             status: 400,
             body: "Product not in stock"
@@ -59,24 +59,25 @@ export async function POST(req: NextRequest) {
         });
     }
 
-    const orderId = v4();
-    console.log("orderId", orderId)
-    db.update(products).set({ quantity: quantityAfterOrder }).where(eq(products.id, body.productId)).run();
+    await db.update(products)
+        .set({ quantity: quantityAfterOrder })
+        .where(eq(products.id, body.productId));
 
-    db.insert(orders).values({
+
+    await db.insert(orders).values({
         id: orderId,
         userId: body.userId,
-        status: "pending",
-        totalPrice: product.price * body.quantity
-    }).run();
+        orderDate: new Date(),
+        totalPrice: product[0].price * body.quantity,
+        status: "pending"
+    }).execute();
 
-    db.insert(orderDetails).values({
+    await db.insert(orderDetails).values({
         id: v4(),
         orderId: orderId,
         productId: body.productId,
-        quantity: body.quantity
-    }).run();
-
+        quantity: body.quantity,
+    }).execute();
 
     return NextResponse.json({
         status: 200,

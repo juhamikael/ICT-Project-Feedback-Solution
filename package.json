@@ -13,7 +13,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@hookform/resolvers": "^3.3.2",
-    "@kinde-oss/kinde-auth-nextjs": "^1.8.22",
+    "@kinde-oss/kinde-auth-nextjs": "^2.0.10",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-label": "^2.0.2",

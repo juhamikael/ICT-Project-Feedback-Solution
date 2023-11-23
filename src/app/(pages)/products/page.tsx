@@ -13,7 +13,7 @@ import {
 import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { cn } from "@/lib/utils";
-import zoom from "@/styles/zoom.module.css";
+import zoom from "@/app/styles/zoom.module.css";
 
 // import type { TProduct } from "@/types/product";
 
@@ -79,7 +79,6 @@ const Products = () => {
     setFilteredProducts(newFilteredProducts);
   }, [selectedPrice, selectedCategory, dbProducts]);
 
-  // Match category id to category name
   const getCategoryName = (categoryId: string) => {
     const category = categories.find((category) => category.id === categoryId);
     return _.capitalize(category?.name);

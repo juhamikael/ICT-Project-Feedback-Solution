@@ -22,6 +22,41 @@
       "when": 1700528966228,
       "tag": "0002_wide_jasper_sitwell",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1700531192223,
+      "tag": "0003_blushing_bloodscream",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1700676098599,
+      "tag": "0004_reflective_metal_master",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1700683182127,
+      "tag": "0005_even_kabuki",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1700683678508,
+      "tag": "0006_complete_moondragon",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1700683898180,
+      "tag": "0007_calm_vanisher",
+      "breakpoints": true
     }
   ]
 }

@@ -20,7 +20,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
-    const category = db.select().from(subcategories).where(eq(subcategories.id, body.id)).get();
+    const category = await db.select().from(subcategories).where(eq(subcategories.id, body.id))
 
     if (category) {
         return NextResponse.json({
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
         });
     }
 
-    db.insert(subcategories).values(body).run();
+    await db.insert(subcategories).values(body);
 
     return NextResponse.json({
         status: 200,
