@@ -26,8 +26,8 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
     const body = await req.json();
-    const category = db.select().from(categories).where(eq(categories.id, body.categoryId)).get();
-    const subcategory = db.select().from(subcategories).where(eq(subcategories.id, body.subcategoryId)).get();
+    const category = await db.select().from(categories).where(eq(categories.id, body.categoryId))
+    const subcategory = await db.select().from(subcategories).where(eq(subcategories.id, body.subcategoryId))
     const productId = v4();
 
     if (!category) {
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
         id: productId,
     };
 
-    db.insert(products).values(product).run();
+    await db.insert(products).values(product);
 
     return NextResponse.json({
         status: 200,

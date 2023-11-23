@@ -14,13 +14,13 @@ export async function GET(request: Request) {
         });
     }
 
-    const product = db.select().from(products).where(eq(products.id, Number(id))).get();
+    const product = await db.select().from(products).where(eq(products.id, id));
 
-    if (!product) {
-        return Response.json({
+    if (!product.length) {
+        return new Response(JSON.stringify({
             status: 404,
             body: "Product not found",
-        });
+        }), { status: 404 });
     }
 
     return Response.json({
