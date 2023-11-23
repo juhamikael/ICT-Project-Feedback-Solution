@@ -1,15 +1,15 @@
 import { db } from "@/lib/db";
-import { products, categories, subcategories, productIdSchema } from "@/lib/db/schema/product";
+import { products, categories, subcategories } from "@/lib/db/schema/product";
 import { eq } from "drizzle-orm";
 import { NextResponse, NextRequest } from "next/server";
 import { v4 } from "uuid";
-type Product = {
+export type Product = {
     id: string;
     imageId: string;
     name: string;
     price: number;
     description: string | null;
-    quantity: number;
+    quantity: number | null;
     categoryId: string | null;
     subcategoryId: string | null;
 }
@@ -30,14 +30,14 @@ export async function POST(req: NextRequest) {
     const subcategory = await db.select().from(subcategories).where(eq(subcategories.id, body.subcategoryId))
     const productId = v4();
 
-    if (!category) {
+    if (!category || category.length === 0) {
         console.log("Category not found")
         return NextResponse.json({
             status: 400,
             body: "Category not found"
         });
     }
-    if (!subcategory) {
+    if (!subcategory || subcategory.length === 0) {
         console.log("Subcategory not found")
         return NextResponse.json({
             status: 400,
