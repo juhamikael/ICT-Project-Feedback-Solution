@@ -6,6 +6,7 @@ import { products } from './product';
 export const orders = pgTable("orders", {
     id: text("id").primaryKey(),
     userId: text("userId").references(() => users.id, { onDelete: "cascade" }),
+    orderDate: timestamp("orderDate").notNull(),
     status: text("status").notNull(),
     totalPrice: real("totalPrice").notNull(),
 });
@@ -15,6 +16,5 @@ export const orderDetails = pgTable("orderDetails", {
     orderId: text("orderId").references(() => orders.id, { onDelete: "cascade" }),
     productId: text("productId").references(() => products.id, { onDelete: "cascade" }),
     quantity: integer("quantity").notNull(),
-    orderDate: timestamp("orderDate").notNull()
 });
 
