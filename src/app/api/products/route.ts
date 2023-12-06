@@ -3,16 +3,7 @@ import { products, categories, subcategories } from "@/lib/db/schema/product";
 import { eq } from "drizzle-orm";
 import { NextResponse, NextRequest } from "next/server";
 import { v4 } from "uuid";
-export type Product = {
-    id: string;
-    imageId: string;
-    name: string;
-    price: number;
-    description: string | null;
-    quantity: number | null;
-    categoryId: string | null;
-    subcategoryId: string | null;
-}
+import type { Product } from "@/types/api";
 
 export async function GET() {
     const result: Product[] = await db.select().from(products);

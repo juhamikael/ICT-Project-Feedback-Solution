@@ -6,8 +6,8 @@ import { NextResponse } from "next/server";
 import { baseUrl } from "@/lib/config";
 export async function GET() {
     const { getUser } = getKindeServerSession();
-
     const user = await getUser();
+
     if (!user || user == null || !user.id)
         throw new Error("something went wrong with authentication");
 

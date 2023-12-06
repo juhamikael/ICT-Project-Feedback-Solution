@@ -1,10 +1,10 @@
 import Feedback from "@/components/feedback/feedback";
-import React from 'react';
+import React from "react";
 
 const Page = ({}) => {
   return (
     <div>
-      <Feedback/>
+      <Feedback />
     </div>
   );
 };

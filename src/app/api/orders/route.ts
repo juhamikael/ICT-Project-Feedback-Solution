@@ -6,20 +6,23 @@ import { eq } from "drizzle-orm";
 import { NextResponse, NextRequest } from "next/server";
 import { v4 } from "uuid";
 
-type Order = {
-    id: string;
-    userId: string | null;
-    status: string;
-    totalPrice: number;
-}
 
-export async function GET() {
-    const result: Order[] = await db.select().from(orders);
+export async function GET(req: NextRequest) {
+    const { searchParams } = req.nextUrl;
+    const userId = searchParams.get("userId");
+
+    // Fetch all orders for the user with details and product images in a single query
+    const allOrders = await db.select().from(orders)
+        .leftJoin(orderDetails, eq(orders.id, orderDetails.orderId))
+        .leftJoin(products, eq(orderDetails.productId, products.id))
+        .where(eq(orders.userId, userId)).execute();
+
+    console.log(allOrders)
+
+
     return NextResponse.json({
         status: 200,
-        body: {
-            orders: result,
-        }
+        body: allOrders
     });
 }
 
@@ -29,6 +32,7 @@ export async function POST(req: NextRequest) {
     const user = await db.select().from(users).where(eq(users.id, body.userId))
     const orderId = v4();
 
+    console.log(body)
     if (!product) {
         return NextResponse.json({
             status: 400,

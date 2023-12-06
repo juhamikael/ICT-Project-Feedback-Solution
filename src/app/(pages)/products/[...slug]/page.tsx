@@ -32,12 +32,13 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
   const [product, setProduct] = useState<TProduct | null>(null);
   const [errorText, setErrorText] = useState<string | null>(null);
   const [loadingError, setLoadingError] = useState<boolean>(false);
-  const { isAuthenticated } = useKindeBrowserClient();
+  const { isAuthenticated, user } = useKindeBrowserClient();
+  const userId = user?.id;
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const res = await fetch(`/api/products/${productId}`);
-        console.log("Response Status:", res.status); // Debugging
 
         if (res.status === 404) {
           setLoadingError(true);
@@ -106,7 +107,6 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
       </div>
     );
   }
-  console.log(product);
 
   return (
     <MaxWidthWrapper>
@@ -156,7 +156,7 @@ const SingleProduct: FC<TSingleProductProps> = ({ params }) => {
                 </CardDescription>
                 <CardDescription>{product.id}</CardDescription>
                 {isAuthenticated && (
-                  <OrderProductSheet productId={product.id} />
+                  <OrderProductSheet userId={userId!} product={product} />
                 )}
               </div>
             </CardFooter>
