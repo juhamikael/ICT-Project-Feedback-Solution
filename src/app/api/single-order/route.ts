@@ -11,15 +11,20 @@ import { v4 } from "uuid";
 export async function GET(req: NextRequest) {
     const { searchParams } = req.nextUrl;
     const orderId = searchParams.get("orderId");
-    console.log(orderId)
-    // Fetch all orders for the user with details and product images in a single query
+
+    if (!orderId) {
+        return NextResponse.json({
+            status: 400,
+            body: "Order not found"
+        });
+    }
+
     const order = await db.select().from(orders)
         .leftJoin(orderDetails, eq(orders.id, orderDetails.orderId))
         .leftJoin(products, eq(orderDetails.productId, products.id))
         .leftJoin(feedBack, eq(feedBack.orderId, orders.id))
         .where(eq(orders.id, orderId)).execute();
 
-    console.log(order)
 
 
     return NextResponse.json({

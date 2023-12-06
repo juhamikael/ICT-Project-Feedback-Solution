@@ -22,7 +22,7 @@ import { Button } from "@/components/ui/button";
 import { baseUrl } from "@/lib/config";
 
 import * as z from "zod";
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import Image from "next/image";

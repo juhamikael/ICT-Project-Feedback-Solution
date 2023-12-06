@@ -8,7 +8,6 @@ export const feedBack = pgTable("feedback", {
     feedback: text("feedback"),
     userId: text("userId").references(() => users.id, { onDelete: "cascade" }),
     orderId: text("orderId").references(() => orders.id, { onDelete: "cascade" }),
-    createdAt: timestamp("orderDate").notNull()
+    createdAt: text("createdAt").notNull()
 });
-
 

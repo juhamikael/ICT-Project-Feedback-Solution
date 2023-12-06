@@ -11,13 +11,20 @@ export async function GET(req: NextRequest) {
     const { searchParams } = req.nextUrl;
     const userId = searchParams.get("userId");
 
+    if (!userId) {
+        return NextResponse.json({
+            status: 400,
+            body: "User id is required"
+        });
+    }
+
     // Fetch all orders for the user with details and product images in a single query
     const allOrders = await db.select().from(orders)
         .leftJoin(orderDetails, eq(orders.id, orderDetails.orderId))
         .leftJoin(products, eq(orderDetails.productId, products.id))
         .where(eq(orders.userId, userId)).execute();
 
-    console.log(allOrders)
+    // console.log(allOrders)
 
 
     return NextResponse.json({
@@ -32,7 +39,7 @@ export async function POST(req: NextRequest) {
     const user = await db.select().from(users).where(eq(users.id, body.userId))
     const orderId = v4();
 
-    console.log(body)
+    // console.log(body)
     if (!product) {
         return NextResponse.json({
             status: 400,

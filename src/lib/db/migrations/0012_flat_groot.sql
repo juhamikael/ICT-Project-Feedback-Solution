@@ -1,0 +1,1 @@
+ALTER TABLE "feedback" ALTER COLUMN "createdAt" SET DATA TYPE text;
