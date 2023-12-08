@@ -1,12 +1,12 @@
 import { db } from "@/lib/db";
 import { orderDetails, orders } from "@/lib/db/schema/orders";
 import { feedBack } from "@/lib/db/schema/feedback";
-import { eq, and} from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { NextResponse, NextRequest } from "next/server";
 import { v4 } from "uuid";
 
 export async function GET(req: NextRequest) {
- 
+
     const { searchParams } = req.nextUrl;
     const orderId = searchParams.get("orderId");
     const userId = searchParams.get("userId");
@@ -26,19 +26,17 @@ export async function GET(req: NextRequest) {
         });
     }
 
-    console.log("orderId", orderId)
-    console.log("userId", userId)
 
-    const feedbackEntry = await db.select() 
-    .from(feedBack).where(and(
-        eq(feedBack.userId, userId),
-        eq(feedBack.orderId, orderId))
-    )
+    const feedbackEntry = await db.select()
+        .from(feedBack).where(and(
+            eq(feedBack.userId, userId),
+            eq(feedBack.orderId, orderId))
+        )
 
-    if (feedbackEntry.length > 0 ) {
+    if (feedbackEntry.length > 0) {
         feedbackGiven = true
-    } 
-    return NextResponse.json ({
+    }
+    return NextResponse.json({
         status: 200,
         feedbackGiven: feedbackGiven
     })
@@ -60,11 +58,11 @@ export async function POST(req: NextRequest) {
     }
 
     await db.insert(feedBack).values(feedback).execute();
- 
+
     return NextResponse.json({
         status: 200,
         body: feedback,
         message: "Feedback gave succesfully"
-        
+
     });
 }

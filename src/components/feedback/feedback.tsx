@@ -28,7 +28,7 @@ const formSchema = z.object({
   feedbackText: z.string(),
 });
 
-const Feedback = ({ orderId }: { orderId: string }) => {
+const Feedback = ({ orderId }: { orderId: string | string[] }) => {
   const [grade, setGrade] = useState(0);
   const [showFeedbackBox, setShowFeedbackBox] = useState(false);
   const [answer, setAnswer] = useState("");
@@ -65,7 +65,6 @@ const Feedback = ({ orderId }: { orderId: string }) => {
   };
 
   const sendAnswer = async (values: z.infer<typeof formSchema>) => {
-  
     try {
       form.setValue("grade", grade);
       const url = `${baseUrl}/api/send-feedback`;
@@ -75,7 +74,7 @@ const Feedback = ({ orderId }: { orderId: string }) => {
         grade: form.getValues("grade"),
         feedback: form.getValues("feedbackText"),
         orderId: orderId,
-        feedbackDate: new Date()
+        feedbackDate: new Date(),
       };
       await axios.post(url, body);
     } catch (error) {
@@ -84,7 +83,8 @@ const Feedback = ({ orderId }: { orderId: string }) => {
     }
 
     setShowFeedbackBox(false);
-    console.log(form.getValues());
+    // reload page
+    window.location.reload();
   };
 
   const updateStars = () => {

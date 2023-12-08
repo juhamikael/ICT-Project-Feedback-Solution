@@ -12,7 +12,7 @@ import type { ViewOrder } from "@/types/api";
 import { format } from "date-fns";
 import { CldImage } from "next-cloudinary";
 import Link from "next/link";
-import { returnOrderStatus } from "@/lib/utils";
+import { translateOrderStatus } from "@/lib/utils";
 
 const ViewOrders = ({ item }: { item: ViewOrder }) => {
   const descriptionClass = "text-lg text-white";
@@ -34,7 +34,7 @@ const ViewOrders = ({ item }: { item: ViewOrder }) => {
         </CardDescription>
         <CardDescription className={cn(descriptionClass)}>
           <span className="font-bold">Tila: </span>
-          <span>{returnOrderStatus(item.orders.status)}</span>
+          <span>{translateOrderStatus(item.orders.status)}</span>
         </CardDescription>
         <CardDescription className={cn(descriptionClass)}>
           <span>Hinta: </span>

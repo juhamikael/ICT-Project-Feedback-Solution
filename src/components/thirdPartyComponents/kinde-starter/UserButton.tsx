@@ -69,6 +69,21 @@ export default function UserButton({}: {}) {
                   <p className="text-stone-400">{user?.email}</p>
                 </div>
               </div>
+
+              <Menu.Item>
+                {({ active }) => (
+                  <Link
+                    href="/admin"
+                    className={clsx(
+                      active && "bg-stone-700/50 dark:bg-stone-300",
+                      "inline-flex items-center gap-6 px-[34px] py-2 text-sm text-stone-600"
+                    )}
+                  >
+                    <span>Admin</span>
+                  </Link>
+                )}
+              </Menu.Item>
+
               <Menu.Item>
                 {({ active }) => (
                   <Link

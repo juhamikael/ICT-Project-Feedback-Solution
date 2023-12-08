@@ -33,7 +33,7 @@ export async function GET() {
             .set(userValues)
             .where(eq(users.id, user.id));
     }
-    return NextResponse.redirect(`${baseUrl}/dashboard`);
+    return NextResponse.redirect(`${baseUrl}`);
 }
 
 

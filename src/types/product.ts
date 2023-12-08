@@ -6,6 +6,7 @@ export type TProduct = {
     description: string;
     quantity: number;
     productType: string;
+    categoryId?: string;
 };
 
 export type TProductInfo = {
@@ -15,4 +16,9 @@ export type TProductInfo = {
 
 export type TAllProducts = {
     [category: string]: TProductInfo[];
+};
+
+export type TCategory = {
+    id: string;
+    name: string;
 };

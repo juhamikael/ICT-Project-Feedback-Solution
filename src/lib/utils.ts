@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const returnOrderStatus = (status: string) => {
+export const translateOrderStatus = (status: string) => {
   switch (status) {
     case "pending":
       return "Odottaa käsittelyä";

@@ -19,22 +19,21 @@ type TOrder = {
   status: string;
   totalPrice: number;
 };
-// type TOrders = {
-//   orders: TOrder[];
+
 import type { ViewOrder } from "@/types/api";
 import ViewOrders from "./_components/ViewOrders";
+
 const Dashboard: FC<TDashboardProps> = async ({}) => {
   const btnStyle = "border border-b rounded-none text-white ";
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-
-  const orders = await axios.get(`${baseUrl}/api/orders`, {
+  const orders = await axios.get(`${baseUrl}/api/user-orders`, {
     params: {
       userId: user?.id,
     },
   });
   const data: ViewOrder[] = orders.data.body;
-  console.log(data);
+
   return (
     <MaxWidthWrapper>
       <div className="flex flex-col md:flex-row">
@@ -51,15 +50,6 @@ const Dashboard: FC<TDashboardProps> = async ({}) => {
               )}
             >
               Ostoshistoria
-            </Button>
-            <Button
-              className={cn(
-                buttonVariants({ variant: "outline" }),
-                btnStyle,
-                "rounded-b-xl"
-              )}
-            >
-              Tilin Asetukset
             </Button>
           </div>
         </div>

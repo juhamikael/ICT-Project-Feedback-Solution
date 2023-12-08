@@ -14,24 +14,9 @@ import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { cn } from "@/lib/utils";
 import zoom from "@/app/styles/zoom.module.css";
-
-// import type { TProduct } from "@/types/product";
-
-type TCategory = {
-  id: string;
-  name: string;
-};
-
-type TProduct = {
-  id: string;
-  imageId: string;
-  name: string;
-  price: number;
-  description: string;
-  quantity: number;
-  categoryId: number | string | null;
-  subCategoryId: number | string | null;
-};
+import { useCategoryStore, useProductStore } from "@/store/zustand";
+import { TProduct } from "@/types/product";
+import { buttonVariants } from "@/components/ui/button";
 
 const Products = () => {
   const [selectedPrice, setSelectedPrice] = useState<number | null | string>(
@@ -39,33 +24,24 @@ const Products = () => {
   );
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [filteredProducts, setFilteredProducts] = useState<TProduct[]>([]);
-  const [dbProducts, setDbProducts] = useState<TProduct[]>([]);
-  const [categories, setCategories] = useState<TCategory[]>([]);
+  const [isComponentMounted, setIsComponentMounted] = useState(false);
+
+  const { products } = useProductStore();
+  const { categories } = useCategoryStore();
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const res = await fetch("/api/products");
-      const data = await res.json();
-      setDbProducts(data.body.products);
-    };
-
-    const fetchCategories = async () => {
-      const res = await fetch("/api/categories");
-      const data = await res.json();
-      setCategories(data.body);
-    };
-
-    fetchCategories();
-    fetchProducts();
+    setIsComponentMounted(true);
   }, []);
 
   useEffect(() => {
-    const newFilteredProducts = dbProducts
+    const newFilteredProducts = products
       .filter((product) => {
         const matchesPrice =
           selectedPrice === "kaikki" ||
           selectedPrice === null ||
-          product.price <= parseInt(selectedPrice, 10);
+          (typeof product.price === "number" &&
+            typeof selectedPrice === "string" &&
+            product.price <= parseInt(selectedPrice, 10));
 
         const matchesCategory =
           selectedCategory === null ||
@@ -74,15 +50,36 @@ const Products = () => {
 
         return matchesPrice && matchesCategory;
       })
-      .sort((a, b) => a.price - b.price);
+      .sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
 
     setFilteredProducts(newFilteredProducts);
-  }, [selectedPrice, selectedCategory, dbProducts]);
+  }, [selectedPrice, selectedCategory, products]);
 
   const getCategoryName = (categoryId: string) => {
     const category = categories.find((category) => category.id === categoryId);
     return _.capitalize(category?.name);
   };
+
+  if (!isComponentMounted || products.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen">
+        <div className="pb-4 font-bold text-2xl underline">
+          Ladataan tuotteita...
+        </div>
+        <Link href="/">
+          <button
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "rounded-b-xl"
+            )}
+          >
+            Hae tuotteet uudelleen
+          </button>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <MaxWidthWrapper>
       <div className="flex flex-col md:flex-row justify-around">

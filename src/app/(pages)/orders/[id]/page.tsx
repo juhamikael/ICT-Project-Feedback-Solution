@@ -14,25 +14,15 @@ import Feedback from "@/components/feedback/feedback";
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
-import Link from "next/link";
 import { baseUrl } from "@/lib/config";
 import axios from "axios";
 import { FC } from "react";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import { returnOrderStatus } from "@/lib/utils";
 import ShowDetails from "./_components/ShowDetails";
 type TSingleOrderProps = {
   params: {
     id: string[];
   };
-};
-
-const AskFeedback = () => {
-  return (
-    <div>
-      <div>AskFeedback</div>
-    </div>
-  );
 };
 
 const Page: FC<TSingleOrderProps> = async ({ params }) => {
@@ -53,10 +43,6 @@ const Page: FC<TSingleOrderProps> = async ({ params }) => {
       orderId: orderId,
     },
   });
-
-  console.log(feedbackGiven.data.feedbackGiven);
-
-  console.log(data.orders.status);
 
   return (
     <MaxWidthWrapper>

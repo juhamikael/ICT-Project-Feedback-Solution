@@ -51,9 +51,8 @@ const OrderProductSheet = ({
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
     try {
-      const url = `${baseUrl}/api/orders`;
+      const url = `${baseUrl}/api/user-orders`;
       const body = {
         productId: product.id,
         quantity: values.quantity,
