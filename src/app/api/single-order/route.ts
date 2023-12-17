@@ -1,12 +1,9 @@
 import { db } from "@/lib/db";
 import { orderDetails, orders } from "@/lib/db/schema/orders";
 import { feedBack } from "@/lib/db/schema/feedback";
-import { users } from "@/lib/db/schema/users";
 import { products } from "@/lib/db/schema/product";
 import { eq } from "drizzle-orm";
 import { NextResponse, NextRequest } from "next/server";
-import { v4 } from "uuid";
-
 
 export async function GET(req: NextRequest) {
     const { searchParams } = req.nextUrl;
@@ -24,8 +21,6 @@ export async function GET(req: NextRequest) {
         .leftJoin(products, eq(orderDetails.productId, products.id))
         .leftJoin(feedBack, eq(feedBack.orderId, orders.id))
         .where(eq(orders.id, orderId)).execute();
-
-
 
     return NextResponse.json({
         status: 200,

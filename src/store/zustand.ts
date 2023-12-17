@@ -19,7 +19,6 @@ interface CategoryState {
 export const useCategoryStore = create<CategoryState>()(
     persist(
         (set) => ({
-            // Empty or categories localstorage
             categories: [],
             setCategories: (categories) => set({ categories }),
         }),

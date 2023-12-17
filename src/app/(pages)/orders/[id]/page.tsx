@@ -1,15 +1,5 @@
-import { buttonVariants } from "@/components/ui/button";
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { cn } from "@/lib/utils";
-import type { ViewOrder, ViewOrderWithFeedback } from "@/types/api";
-import { format } from "date-fns";
-import { CldImage } from "next-cloudinary";
+
+import type { ViewOrderWithFeedback } from "@/types/api";
 import Feedback from "@/components/feedback/feedback";
 
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";

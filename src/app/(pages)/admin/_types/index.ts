@@ -50,6 +50,9 @@ export type TParsedOrder = {
     orderId: string;
     userId: string;
     productId: string;
+    date: string;
+    email: string;
+
 };
 
 
@@ -62,6 +65,7 @@ export type TParsedFeedback = {
     productId: string;
     orderId: string;
     userId: string;
+    date: string;
 }
 
 

@@ -17,6 +17,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
 
 interface FeedbackListProps {
   feedbackData: TParsedFeedback[];
@@ -57,6 +58,10 @@ const FeedbackList: React.FC<FeedbackListProps> = ({ feedbackData }) => {
                     />
                   ))}
                 </div>
+                <CardDescription>
+                  <Label>Tilaus </Label>
+                  {fb.orderId}
+                </CardDescription>
                 <div className="">{fb.feedback}</div>
               </div>
             </div>
@@ -129,6 +134,7 @@ const AdminPanel = () => {
       productId: products.id,
       orderId: feedback.orderId,
       userId: feedback.userId,
+      date: feedback.createdAt,
     };
   });
 
@@ -146,6 +152,8 @@ const AdminPanel = () => {
       orderId: orders.id,
       userId: orders.userId,
       productId: products.id,
+      date: orders.orderDate,
+      email: users.email,
     };
   });
 

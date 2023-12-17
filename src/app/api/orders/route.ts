@@ -70,7 +70,6 @@ export async function POST(req: NextRequest) {
     }).execute();
 
     await db.insert(orderDetails).values({
-        id: v4(),
         orderId: orderId,
         productId: body.productId,
         quantity: body.quantity,
