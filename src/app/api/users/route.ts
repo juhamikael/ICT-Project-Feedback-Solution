@@ -7,7 +7,7 @@ type Users = {
     firstName: string | null;
     lastName: string | null;
     email: string | null;
-    lastSeen: Date;
+    lastSeen: Date | null;
 };
 
 export async function GET() {
@@ -17,3 +17,4 @@ export async function GET() {
         body: result,
     });
 }
+

@@ -20,11 +20,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { baseUrl } from "@/lib/config";
-
+import { v4 } from "uuid";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { useProductStore } from "@/store/zustand";
 import Image from "next/image";
 import { CheckCheckIcon } from "lucide-react";
 import type { TCategoriesData } from "@/types/newProducts";
@@ -39,6 +39,7 @@ type TAddProductsFormProps = {
 };
 
 const formSchema = z.object({
+  id: z.string(),
   name: z
     .string()
     .min(2, {
@@ -77,6 +78,7 @@ const AddProductsForm: FC<TAddProductsFormProps> = ({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      id: "",
       name: "",
       imageId: "",
       price: 0,
@@ -86,11 +88,13 @@ const AddProductsForm: FC<TAddProductsFormProps> = ({
       subCategoryId: "",
     },
   });
+  const { setNewProduct, products } = useProductStore();
 
   const [showImages, setShowImages] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string>("");
 
   const [__, setSelectedCategoryId] = useState<string>("");
+  const [productType, setProductType] = useState<string>("");
   const [filteredSubCategories, setFilteredSubCategories] = useState<
     typeof categoryData.subCategoriesData
   >([]);
@@ -120,6 +124,7 @@ const AddProductsForm: FC<TAddProductsFormProps> = ({
       const url = `${baseUrl}/api/products`;
 
       const body = {
+        id: v4(),
         name: values.name,
         description: values.description,
         price: values.price,
@@ -129,7 +134,22 @@ const AddProductsForm: FC<TAddProductsFormProps> = ({
         imageId: values.imageId,
       };
 
+      const bodyForProductStore = {
+        id: body.id,
+        name: body.name,
+        description: body.description,
+        price: body.price,
+        quantity: body.quantity,
+        categoryId: body.categoryId,
+        subcategoryId: body.subcategoryId,
+        imageId: body.imageId,
+        productType: productType,
+      };
+
       await axios.post(url, body);
+
+      setNewProduct(bodyForProductStore);
+
       toast.success("Product added successfully!");
       form.reset();
     } catch (error) {
@@ -240,6 +260,11 @@ const AddProductsForm: FC<TAddProductsFormProps> = ({
                     onValueChange={(value) => {
                       handleCategoryChange(value);
                       field.onChange(value);
+                      setProductType(
+                        categoryData.categoriesData.find(
+                          (category) => category.id === value
+                        )?.name || ""
+                      );
                     }}
                   >
                     <SelectTrigger aria-label="Category">

@@ -12,8 +12,7 @@ export const orders = pgTable("orders", {
 });
 
 export const orderDetails = pgTable("orderDetails", {
-    id: text("id").primaryKey(),
-    orderId: text("orderId").references(() => orders.id, { onDelete: "cascade" }),
+    orderId: text("orderId").primaryKey().references(() => orders.id, { onDelete: "cascade" }),
     productId: text("productId").references(() => products.id, { onDelete: "cascade" }),
     quantity: integer("quantity").notNull(),
 });

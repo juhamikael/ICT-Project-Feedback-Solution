@@ -1,11 +1,11 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "3b8420a0-2e0c-4a67-a136-195d253514fa",
+  "id": "d54a6ac6-e8df-489a-b170-db2d0a1ca414",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
-    "orderDetails": {
-      "name": "orderDetails",
+    "feedback": {
+      "name": "feedback",
       "schema": "",
       "columns": {
         "id": {
@@ -14,11 +14,78 @@
           "primaryKey": true,
           "notNull": true
         },
+        "grade": {
+          "name": "grade",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "feedback": {
+          "name": "feedback",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
         "orderId": {
           "name": "orderId",
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "feedback_userId_users_id_fk": {
+          "name": "feedback_userId_users_id_fk",
+          "tableFrom": "feedback",
+          "tableTo": "users",
+          "columnsFrom": [
+            "userId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "feedback_orderId_orders_id_fk": {
+          "name": "feedback_orderId_orders_id_fk",
+          "tableFrom": "feedback",
+          "tableTo": "orders",
+          "columnsFrom": [
+            "orderId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "orderDetails": {
+      "name": "orderDetails",
+      "schema": "",
+      "columns": {
+        "orderId": {
+          "name": "orderId",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
         },
         "productId": {
           "name": "productId",
@@ -29,12 +96,6 @@
         "quantity": {
           "name": "quantity",
           "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "orderDate": {
-          "name": "orderDate",
-          "type": "date",
           "primaryKey": false,
           "notNull": true
         }
@@ -86,6 +147,12 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "orderDate": {
+          "name": "orderDate",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true
         },
         "status": {
           "name": "status",
@@ -298,7 +365,7 @@
         },
         "last_login": {
           "name": "last_login",
-          "type": "date",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false
         }

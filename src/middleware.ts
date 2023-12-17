@@ -13,7 +13,6 @@ export const config = {
         // Ignore public folder
         // "/((?!api|_next/static|_next/image|favicon.ico).*)",
         // "/products"
-        "/dashboard",
     ]
 };
 

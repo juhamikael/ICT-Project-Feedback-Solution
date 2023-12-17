@@ -7,12 +7,22 @@ import { NextResponse, NextRequest } from "next/server";
 import { v4 } from "uuid";
 
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+    const { searchParams } = req.nextUrl;
+    const userId = searchParams.get("userId");
+
+    if (!userId) {
+        return NextResponse.json({
+            status: 400,
+            body: "User id is required"
+        });
+    }
+
+    // Fetch all orders for the user with details and product images in a single query
     const allOrders = await db.select().from(orders)
         .leftJoin(orderDetails, eq(orders.id, orderDetails.orderId))
         .leftJoin(products, eq(orderDetails.productId, products.id))
-        .leftJoin(users, eq(orders.userId, users.id))
-
+        .where(eq(orders.userId, userId)).execute();
 
     return NextResponse.json({
         status: 200,
@@ -78,26 +88,5 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
         status: 200,
         body: product
-    });
-}
-
-export async function PUT(req: NextRequest) {
-    const body = await req.json();
-    const order = await db.select().from(orders).where(eq(orders.id, body.orderId))
-
-    if (!order) {
-        return NextResponse.json({
-            status: 400,
-            body: "Order not found"
-        });
-    }
-
-    await db.update(orders)
-        .set({ status: body.status })
-        .where(eq(orders.id, body.orderId));
-
-    return NextResponse.json({
-        status: 200,
-        body: order
     });
 }
